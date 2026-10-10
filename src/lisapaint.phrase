@@ -1,0 +1,99 @@
+; LisaPaint phrase file: alerts and menus (lisa-c tools/phrasec.py).
+;
+; Alerts are full sentences, two spaces after a period, addressing the user
+; as "you"; irreversible actions end with the "even with Undo" formula.
+; Menus follow the Office System: File/Print first, no Quit, no Close.
+2
+4
+2000
+?
+Wait
+Stop
+Note
+Caution
+Cancel
+OK
+
+1 note alert
+LisaPaint could not find the message that should appear here.  If you are
+unable to proceed, mention the number ^N to the person who gave you LisaPaint.
+
+2 stop alert
+LisaPaint is having technical difficulties and must stop.  Your other
+documents are not affected.
+
+1001 caution alert
+Do you really want the picture to revert to the version you last saved?
+^L^L
+If you want to leave the picture as it is now, click Cancel.  Once you click
+OK, you will not be able to change your mind, even with Undo.
+
+1002 stop alert
+LisaPaint cannot save the picture, probably because there is not enough room
+on the disk.
+^L^L
+Make room by discarding documents you no longer need or by moving some to
+another disk, then try again.
+
+1003 stop alert
+LisaPaint cannot read the picture from the disk, so it has started a new,
+blank picture instead.
+
+0
+
+1
+File/Print
+Set Aside Everything
+Set Aside
+-
+Save & Put Away
+Save & Continue
+Revert to Previous Version
+-
+Format for Printer...
+Print...
+Monitor the Printer...
+
+2
+Edit
+Undo Last Change
+-
+Cut/X
+Copy/C
+Paste/V
+Clear
+-
+Select All of Document/A
+
+3
+Selection
+Invert
+Fill with Pattern
+-
+Flip Horizontal
+Flip Vertical
+
+4
+Lines
+Hairline
+Thin Lines
+Medium Lines
+Thick Lines
+Very Thick Lines
+
+5
+Brush
+Small Round Brush
+Medium Round Brush
+Large Round Brush
+Square Brush
+Slanted Brush
+Horizontal Brush
+Vertical Brush
+
+6
+Page Layout
+Show Actual Size
+Magnify Pixels
+
+0
