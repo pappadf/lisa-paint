@@ -92,6 +92,8 @@ and `LOS_IMAGE` (Office System 3.1 on a ProFile), or the same files in
 
 ```bash
 make run          # install it on the LOS desktop and open it (build/emu/*.png)
+make serve        # run it yourself: granny-smith in your browser, LOS 3.1 booted with the
+                  # LisaPaint floppy in the drive (prints the address to open)
 make demo         # paint with every tool, magnify, put away, reopen, revert
                   # (build/demo/*.png)
 ```

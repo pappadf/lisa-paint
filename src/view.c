@@ -14,10 +14,10 @@
 #include "paint.h"
 
 enum {
-    PAL_W = 64,                         /* tool palette width */
+    PAL_W = 66,                         /* tool palette: 2 + 2 cells + 1 + 2 + separator */
     CELL_W = 30, CELL_H = 20,           /* square on the screen */
     LINES_TOP = 2 + 7 * CELL_H + 8, LINE_ROW = 10,
-    PAT_H = 37,                         /* pattern palette height */
+    PAT_H = 39,                         /* pattern palette: line, 2, 2 rows, 2 */
     PAT_W = 24, PAT_CELL_H = 16,        /* pattern cells, square on the screen */
     PAT_COLS = 19,
     MIN_W = 360, MIN_H = 200,           /* smallest window */

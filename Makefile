@@ -6,6 +6,8 @@
 #   make run        install and open it on the LOS desktop in granny-smith;
 #                   screenshots in build/emu/
 #   make demo       ... and paint something with the tools (build/demo/)
+#   make serve      run it interactively in granny-smith's web build: prints a
+#                   link to open in a browser (lisa-c/emu/serve.sh)
 #   make clean
 #
 # LISA_C is the lisa-c checkout: the submodule (git clone --recursive), or a
@@ -35,10 +37,13 @@ toolchain:
 run: build/lisapaint.dc42
 	$(LISA_C)/emu/run-los-tool.sh $< build/emu
 
+serve: build/lisapaint.dc42
+	$(LISA_C)/emu/serve.sh $<
+
 demo: build/lisapaint.dc42
 	LISA_C=$(abspath $(LISA_C)) tests/demo.sh $< build/demo
 
 clean:
 	rm -rf build
 
-.PHONY: all toolchain run demo clean
+.PHONY: all toolchain run demo serve clean

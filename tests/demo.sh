@@ -25,7 +25,7 @@ cp "$1" "$OUT/floppy.dc42"
 # Window content origin on the screen, and helpers to address the palettes.
 OX=2; OY=33
 tool_xy() { local t=$1; echo "$((OX + 2 + (t % 2) * 30 + 15)) $((OY + 2 + (t / 2) * 20 + 10))"; }
-pat_xy()  { local k=$1; echo "$((130 + (k % 19) * 25)) $((273 + (k / 19) * 17))"; }
+pat_xy()  { local k=$1; echo "$((132 + (k % 19) * 25)) $((271 + (k / 19) * 17))"; }
 
 S="$OUT/demo.script"
 emit() { echo "$*" >> "$S"; }
