@@ -63,23 +63,48 @@ document is put away.
 
 ## Building and running
 
-You need a lisa-c checkout next to this directory (or set `LISA_C`), with its
-compiler (`make -C ../lisa-c toolchain`) and the emulator setup described in
-lisa-c's `emu/env.sh`. That means `gs-headless` plus your own Lisa ROM and Office
-System disk image in `lisa-c/media/`.
+lisa-c comes in as a git submodule (`lisa-c/`, pinned to the version
+LisaPaint is tested with):
 
 ```bash
-make            # build/lisapaint.dc42: a floppy with {T21}obj and {T21}PHRASE
-make run        # install it on the LOS desktop and open it (build/emu/*.png)
-make demo       # paint with every tool, magnify, put away, reopen, revert
-                # (build/demo/*.png)
+git clone --recursive https://github.com/pappadf/lisa-paint
+cd lisa-paint
+make toolchain    # once: lisa-c's prebuilt compiler (Linux x86_64 or arm64)
+make ENTRIES=/path/to/entries.tsv
 ```
 
-The build is `make -C $(LISA_C) PROG=lisapaint SRCDIR=$PWD/src TOOLNUM=21
-TOOLNAME=LisaPaint tool`: lisa-c compiles every `.c` file in `src/`, compiles
-`lisapaint.phrase`, and writes the floppy. On the Lisa, insert the floppy and
-choose Repair (which registers the tool and its stationery), then open the
-diskette and tear off a sheet of LisaPaint Paper.
+`make` writes `build/lisapaint.dc42`: a floppy with `{T21}obj` and
+`{T21}PHRASE`.
+
+`ENTRIES` is lisa-c's table of the Lisa libraries' entry points. It's derived
+from Apple's software, so it isn't in either repository. Make it from your
+copy of the Lisa Workshop 3.0 library files with lisa-c's
+`tools/gen_entries.py`. If a `lisa-c-private/data/entries.tsv` sits next to
+this directory, it's used without being named.
+
+If you already have a lisa-c clone next to this directory and no submodule,
+that's used instead (or set `LISA_C=/path/to/lisa-c`).
+
+To run LisaPaint you need granny-smith's headless emulator and your own Lisa
+software. That means `GS_HEADLESS`, plus `LISA_ROM` (a Lisa 2 boot ROM, rev H)
+and `LOS_IMAGE` (Office System 3.1 on a ProFile), or the same files in
+`lisa-c/media/`. See `lisa-c/emu/env.sh`.
+
+```bash
+make run          # install it on the LOS desktop and open it (build/emu/*.png)
+make demo         # paint with every tool, magnify, put away, reopen, revert
+                  # (build/demo/*.png)
+```
+
+lisa-c compiles every `.c` file in `src/` and `lisapaint.phrase`, and writes the
+floppy (`make -C lisa-c PROG=lisapaint SRCDIR=$PWD/src TOOLNUM=21
+TOOLNAME=LisaPaint tool`). On a Lisa, or in the emulator:
+1. Insert the floppy and choose Repair, which registers the tool and its
+   stationery.
+2. Open the diskette and tear off a sheet of LisaPaint Paper.
+
+To move to a newer lisa-c: `git -C lisa-c pull`, check that everything still
+works, then commit the new `lisa-c` pointer.
 
 ## Source
 

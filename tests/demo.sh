@@ -10,7 +10,9 @@
 # repaired single-tool diskette and LisaPaint's window (deterministic).
 set -euo pipefail
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-LISA_C="${LISA_C:-$HERE/../../lisa-c}"
+if [ -z "${LISA_C:-}" ]; then          # the submodule, else a lisa-c next to this project
+    if [ -f "$HERE/../lisa-c/Makefile" ]; then LISA_C="$HERE/../lisa-c"; else LISA_C="$HERE/../../lisa-c"; fi
+fi
 source "$LISA_C/emu/env.sh"
 need_emulator
 need "$LISA_ROM" "Lisa ROM (LISA_ROM)"
