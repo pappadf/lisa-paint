@@ -6,8 +6,8 @@
 #   tests/demo.sh floppy.dc42 [out-dir]
 #
 # Uses lisa-c's emulator settings (LISA_C/emu/env.sh: gs-headless, the Lisa
-# ROM and the Office System image).  Screen positions are those of a freshly
-# repaired single-tool diskette and LisaPaint's window (deterministic).
+# ROM and the Office System image).  Screen positions are those of a
+# single-tool diskette and LisaPaint's window (deterministic).
 set -euo pipefail
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 if [ -z "${LISA_C:-}" ]; then          # the submodule, else a lisa-c next to this project
@@ -67,7 +67,6 @@ emit 'assert machine.hd.pram_init(2, false) "pram_init failed"'
 emit "scheduler.run 60000000"
 emit "machine.floppy.drive.0.insert \"$OUT/floppy.dc42\""
 emit "scheduler.run 40000000"
-click 597 216; emit "scheduler.run 80000000"           # Repair
 dclick 181 336; emit "scheduler.run 40000000"          # open the diskette
 dclick 70 58; emit "scheduler.run 60000000"            # tear off LisaPaint Paper
 shot 0-torn-off

@@ -8,14 +8,14 @@
  *   <prefix>SUS   the working state when the document is set aside or the
  *                 Lisa is turned off, so it opens again exactly as it was
  * Both hold a header (picture size, view, tool settings, selection) and the
- * picture's bits. */
+ * picture's bits; tools/lpconv.py converts them to and from MacPaint and PNG. */
 #include <fcntl.h>
 #include <string.h>
 #include <unistd.h>
 #include "paint.h"
 
 #define MAGIC "LPNT"
-enum { VERSION = 1 };
+enum { VERSION = 2 };              /* 1: 720 x 600 pictures; 2: 720 x 800 */
 
 typedef struct {
     char magic[4];

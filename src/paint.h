@@ -1,8 +1,10 @@
 /* LisaPaint: a pixel painting tool for the Lisa Office System.
  *
- * The picture is a 1-bit bitmap the size of an 8 x 10 inch page at the
- * Lisa's resolution (90 x 60 dots per inch: 720 x 600 pixels; Lisa pixels
- * are half again as tall as they are wide).  It lives in an offscreen
+ * The picture is a 1-bit bitmap of 720 x 800 pixels: the width of the Lisa
+ * screen, a little wider than the window shows, and taller than a MacPaint
+ * page (576 x 720), which fits in its top left corner (tools/lpconv.py).
+ * Lisa pixels are half again as tall as they are wide (90 x 60 dots per
+ * inch): the page is 8 x 13.3 inches.  It lives in an offscreen
  * QuickDraw port, so the tools draw into it with QuickDraw, and it is copied
  * to the window with CopyBits (scaled up when the pixels are magnified). */
 #ifndef PAINT_H
@@ -12,7 +14,7 @@
 #include "lisa/desktop.h"
 
 /* ---- the picture ------------------------------------------------------- */
-enum { DOC_W = 720, DOC_H = 600, DOC_ROWBYTES = DOC_W / 8 };
+enum { DOC_W = 720, DOC_H = 800, DOC_ROWBYTES = DOC_W / 8 };
 
 /* The working bitmaps, all DOC_W x DOC_H.  `undo` holds the picture as it
  * was before the last change (Undo Last Change swaps the two), `base` the
