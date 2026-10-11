@@ -5,13 +5,17 @@
 
 The page links to granny-smith's web build with a Lisa 2, the Office System
 3.1 ProFile and LisaPaint's floppy (SITE_URL/lisapaint.dc42).  The ROM and
-the ProFile are copies on archive.org, as on granny-smith's Boot Shelf.
+the ProFile are copies on archive.org, as on granny-smith's Boot Shelf.  The
+emulator is a fixed granny-smith release, GS_VERSION (default v0.9.3, the one
+lisa-c's emu/serve.sh uses), never the moving staging build.
 """
 import html
+import os
 import sys
 import urllib.parse
 
-EMULATOR = 'https://pappadf.github.io/gs-pages/staging/'
+GS_VERSION = os.environ.get('GS_VERSION') or 'v0.9.3'
+EMULATOR = f'https://pappadf.github.io/gs-pages/{GS_VERSION}/'
 ROMS = ['https://ia600103.us.archive.org/view_archive.php?archive=/21/items/lisa-software/'
         'Lisa%20Software.zip&file=Lisa%20Software%2Ffirmware%2F341-0175-H.BIN',
         'https://ia600103.us.archive.org/view_archive.php?archive=/21/items/lisa-software/'
@@ -63,7 +67,8 @@ def main():
   <img src="https://raw.githubusercontent.com/pappadf/lisa-paint/{html.escape(tag)}/docs/screenshot2.png"
        alt="LisaPaint showing the Astronaut picture on the Lisa desktop" width="1440" height="1092">
   <a class="boot" href="{boot}" target="_blank" rel="noopener">Boot it in your browser</a>
-  <p class="small">Opens the granny-smith emulator: a Lisa 2 starting the Office System 3.1, with the
+  <p class="small">Opens the <a href="https://github.com/pappadf/granny-smith">granny-smith</a>
+  emulator ({html.escape(GS_VERSION)}): a Lisa 2 starting the Office System 3.1, with the
   LisaPaint floppy in the drive (the ROM and the Office System disk come from archive.org; the first
   start takes a little while).</p>
   <ol>

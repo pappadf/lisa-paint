@@ -205,7 +205,10 @@ GitHub release as `lisapaint-<tag>.dc42`, and publishes it on GitHub Pages:
 - `https://pappadf.github.io/lisa-paint/` is a page with a Boot link
   (`tools/pages.py`).
 
-The first time, set the repository's Settings > Pages > Source to "GitHub Actions".
+The first time, set the repository's Settings > Pages > Source to "GitHub
+Actions". Then, under Settings > Environments > github-pages, add `v*` to the
+deployment branches and tags: by default only `main` may deploy, and this
+workflow runs on tags.
 
 ## Source
 

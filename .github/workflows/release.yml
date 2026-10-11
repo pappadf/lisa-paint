@@ -6,7 +6,9 @@
 # Pages sends CORS headers, so granny-smith's web build (and its Boot Shelf)
 # can load the floppy straight from there with FD0=<url>.
 #
-# One-time setup: Settings > Pages > Source: "GitHub Actions".
+# One-time setup: Settings > Pages > Source: "GitHub Actions"; then Settings >
+# Environments > github-pages > Deployment branches and tags: add the tag
+# rule "v*" (by default only main may deploy, and this runs on tags).
 name: Release
 
 on:
