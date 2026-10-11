@@ -70,17 +70,11 @@ LisaPaint is tested with):
 git clone --recursive https://github.com/pappadf/lisa-paint
 cd lisa-paint
 make toolchain    # once: lisa-c's prebuilt compiler (Linux x86_64 or arm64)
-make ENTRIES=/path/to/entries.tsv
+make
 ```
 
 `make` writes `build/lisapaint.dc42`: a floppy with `{T21}obj` and
 `{T21}PHRASE`.
-
-`ENTRIES` is lisa-c's table of the Lisa libraries' entry points. It's derived
-from Apple's software, so it isn't in either repository. Make it from your
-copy of the Lisa Workshop 3.0 library files with lisa-c's
-`tools/gen_entries.py`. If a `lisa-c-private/data/entries.tsv` sits next to
-this directory, it's used without being named.
 
 If you already have a lisa-c clone next to this directory and no submodule,
 that's used instead (or set `LISA_C=/path/to/lisa-c`).

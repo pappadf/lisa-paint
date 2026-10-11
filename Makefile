@@ -12,12 +12,7 @@
 #
 # LISA_C is the lisa-c checkout: the submodule (git clone --recursive), or a
 # lisa-c next to this directory.
-# ENTRIES is lisa-c's library entry-point table, made from your copy of the
-# Workshop library files with lisa-c's tools/gen_entries.py (it is derived
-# from Apple's software, so it is in neither repository).  Default: one in a
-# lisa-c-private directory next to this one, if there is one.
 LISA_C   ?= $(if $(wildcard lisa-c/Makefile),lisa-c,../lisa-c)
-ENTRIES  ?= $(firstword $(wildcard ../lisa-c-private/data/entries.tsv))
 TOOLNUM  ?= 21
 TOOLNAME ?= LisaPaint
 SRC      := $(CURDIR)/src

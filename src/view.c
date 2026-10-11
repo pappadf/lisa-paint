@@ -34,7 +34,7 @@ static long antTime;
 static int cursorKind = -1;             /* -1 arrow, else tool */
 
 /* very light gray for the area beyond the picture */
-static const Pattern beyond = {{0x88, 0x00, 0x22, 0x00, 0x88, 0x00, 0x22, 0x00}};
+static const Pattern beyond = {0x88, 0x00, 0x22, 0x00, 0x88, 0x00, 0x22, 0x00};
 
 void view_init(void)
 {
@@ -111,7 +111,7 @@ static void draw_ants_in(const Rect *clip)
     ClipRect(&c);
     PenNormal();
     PenMode(patXor);
-    PenPat(&antPats[active ? antPhase : 0]);
+    PenPat(antPats[active ? antPhase : 0]);
     FrameRect(&w);
     PenNormal();
     ClipRect(&win->portRect);
@@ -175,7 +175,7 @@ static void draw_view(void)
     w = view_doc_to_win(&all);
     if (w.right < viewR.right || w.bottom < viewR.bottom) {
         ClipRect(&viewR);
-        FillRect(&viewR, &beyond);
+        FillRect(&viewR, beyond);
         ClipRect(&win->portRect);
     }
     SetRect(&all, st.sx, st.sy, st.sx + view_w(), st.sy + view_h());
@@ -254,13 +254,13 @@ void view_draw_palettes(void)
     MoveTo(patR.left, patR.top);
     LineTo(patR.right - 1, patR.top);
     r = pat_swatch();
-    FillRect(&r, &patterns[st.pattern]);
+    FillRect(&r, patterns[st.pattern]);
     FrameRect(&r);
     for (int k = 0; k < N_PATTERNS; k++) {
         Rect c = pat_cell(k);
         if (c.right > patR.right)
             continue;
-        FillRect(&c, &patterns[k]);
+        FillRect(&c, patterns[k]);
         FrameRect(&c);
         if (k == st.pattern) {
             Rect o = c;

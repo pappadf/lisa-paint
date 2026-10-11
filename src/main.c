@@ -21,7 +21,7 @@ enum { L_ACTUAL = 1, L_MAGNIFY };
 
 static char heap[32768];                /* QuickDraw / Window Manager heap */
 static MenuInfo menus[N_MENUS];
-PAlertRec alertFile;
+TAlertFile alertFile;
 static unsigned char docPrefix[256];    /* the document's diskfile prefix */
 static int hasDoc;                      /* docPrefix is valid */
 static int pendingAlert;                /* to show once the window is active */
@@ -180,13 +180,13 @@ static void filer_event(EventRecord *ev, int *done)
         break;
     case fcClose:                       /* put away: make the edits permanent */
         ok = !hasDoc || save_doc(docPrefix);
-        TellFiler(&err, ok ? docClosd : docNotClosed, ok ? allOk : cantWrite, ev->who);
+        TellFiler(&err, ok ? docClosd : docNotClosed, ok ? allOK : cantWrite, ev->who);
         if (ok) close_doc();
         break;
     case fcSuspend:                     /* set aside, or the Lisa is turning off */
         commit_selection();
         ok = !hasDoc || doc_save(docPrefix, 1) == DOC_OK;
-        TellFiler(&err, ok ? docClosd : docNotClosed, ok ? allOk : cantWrite, ev->who);
+        TellFiler(&err, ok ? docClosd : docNotClosed, ok ? allOK : cantWrite, ev->who);
         if (ok) close_doc();
         break;
     case fcPut:                         /* to new diskfiles; the old ones go */
@@ -195,15 +195,15 @@ static void filer_event(EventRecord *ev, int *done)
             doc_remove(docPrefix, 0);
             doc_remove(docPrefix, 1);
         }
-        TellFiler(&err, ok ? docXfered : docNotXfered, ok ? allOk : cantWrite, ev->who);
+        TellFiler(&err, ok ? docXfered : docNotXfered, ok ? allOK : cantWrite, ev->who);
         if (ok) close_doc();
         break;
     case fcCopy:                        /* a copy in new diskfiles; stay open */
         ok = save_doc(fx.thePrefix);
-        TellFiler(&err, ok ? docXfered : docNotXfered, ok ? allOk : cantWrite, ev->who);
+        TellFiler(&err, ok ? docXfered : docNotXfered, ok ? allOK : cantWrite, ev->who);
         break;
     case fcShred:
-        TellFiler(&err, docClosd, allOk, ev->who);
+        TellFiler(&err, docClosd, allOK, ev->who);
         close_doc();
         break;
     case fcTerminate:
@@ -223,7 +223,7 @@ static void command(int m, int i)
     switch (m) {
     case M_FILE:
         switch (i) {
-        case F_SETASIDEALL: DoFilingCmd(cmdCloseAll); break;
+        case F_SETASIDEALL: DoFilingCmd(cmdClosAll); break;
         case F_SETASIDE:    DoFilingCmd(cmdClose); break;
         case F_PUTAWAY:
             if (hasDoc && !save_doc(docPrefix)) {
@@ -322,7 +322,7 @@ int main(void)
     tool_prefix(prefix);
     InitMP(theHeap, prefix, (void *)FailedAlert, 2, menus, &alertFile, &err);
     if (err > 0) {
-        TellFiler(&err, initFailed, internalError, 0);
+        TellFiler(&err, InitFailed, internalError, 0);
         ImDying();
         return 1;
     }

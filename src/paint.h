@@ -104,7 +104,7 @@ void doc_remove(const unsigned char *prefix, int suspended);
 
 /* alerts in the phrase file */
 enum { A_REVERT = 1001, A_CANTSAVE, A_CANTREAD };
-extern PAlertRec alertFile;
+extern TAlertFile alertFile;
 
 /* small helpers */
 static inline int imin(int a, int b) { return a < b ? a : b; }

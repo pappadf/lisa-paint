@@ -79,7 +79,7 @@ static inline void setpx(const BitMap *b, int x, int y, int on)
 
 static inline int patpx(int x, int y)
 {
-    return (patterns[st.pattern].pat[y & 7] >> (7 - (x & 7))) & 1;
+    return (patterns[st.pattern][y & 7] >> (7 - (x & 7))) & 1;
 }
 
 void begin_change(void)
@@ -191,14 +191,14 @@ static void stamp(int x, int y, Rect *bounds)
     case T_BRUSH:
         PenNormal();
         switch (st.brush) {
-        case 0: SetRect(&r, x - 2, y - 1, x + 2, y + 2); FillOval(&r, &patterns[st.pattern]); break;
-        case 1: SetRect(&r, x - 4, y - 3, x + 5, y + 3); FillOval(&r, &patterns[st.pattern]); break;
-        case 2: SetRect(&r, x - 7, y - 5, x + 8, y + 5); FillOval(&r, &patterns[st.pattern]); break;
-        case 3: SetRect(&r, x - 4, y - 3, x + 5, y + 3); FillRect(&r, &patterns[st.pattern]); break;
+        case 0: SetRect(&r, x - 2, y - 1, x + 2, y + 2); FillOval(&r, patterns[st.pattern]); break;
+        case 1: SetRect(&r, x - 4, y - 3, x + 5, y + 3); FillOval(&r, patterns[st.pattern]); break;
+        case 2: SetRect(&r, x - 7, y - 5, x + 8, y + 5); FillOval(&r, patterns[st.pattern]); break;
+        case 3: SetRect(&r, x - 4, y - 3, x + 5, y + 3); FillRect(&r, patterns[st.pattern]); break;
         default: {
             static const int dx[] = {0, 0, 0, 0, 5, 7, 0}, dy[] = {0, 0, 0, 0, -4, 0, 5};
             int ex = dx[st.brush], ey = dy[st.brush];
-            PenPat(&patterns[st.pattern]);
+            PenPat(patterns[st.pattern]);
             PenSize(2, 1);
             MoveTo(x - ex, y - ey);
             LineTo(x + ex, y + ey);
@@ -231,7 +231,7 @@ static void track_freehand(Point p)
     if (st.tool == T_PENCIL) {
         color = !px(&pic.bits, p.h, p.v);   /* starting on black draws white */
         PenNormal();
-        PenPat(color ? &patterns[0] : &patterns[6]);
+        PenPat(color ? patterns[0] : patterns[6]);
         MoveTo(p.h, p.v);
         LineTo(p.h, p.v);
         bounds = grow_rect(rect_of(p, p), 1, 1);
@@ -358,11 +358,11 @@ static void draw_shape(Point a, Point b, Rect *bounds)
     r = rect_of(a, b);
     switch (st.tool) {
     case T_RECT:   FrameRect(&r); break;
-    case T_FRECT:  FillRect(&r, &patterns[st.pattern]); FrameRect(&r); break;
+    case T_FRECT:  FillRect(&r, patterns[st.pattern]); FrameRect(&r); break;
     case T_RRECT:  FrameRoundRect(&r, 24, 16); break;
-    case T_FRRECT: FillRoundRect(&r, 24, 16, &patterns[st.pattern]); FrameRoundRect(&r, 24, 16); break;
+    case T_FRRECT: FillRoundRect(&r, 24, 16, patterns[st.pattern]); FrameRoundRect(&r, 24, 16); break;
     case T_OVAL:   FrameOval(&r); break;
-    case T_FOVAL:  FillOval(&r, &patterns[st.pattern]); FrameOval(&r); break;
+    case T_FOVAL:  FillOval(&r, patterns[st.pattern]); FrameOval(&r); break;
     }
     PenNormal();
     *bounds = grow_rect(r, 1, 1);
@@ -592,7 +592,7 @@ void cmd_fill(void)
 {
     if (!st.hasSel) return;
     sel_change();
-    FillRect(&st.sel, &patterns[st.pattern]);
+    FillRect(&st.sel, patterns[st.pattern]);
     view_show_doc(&st.sel);
 }
 
